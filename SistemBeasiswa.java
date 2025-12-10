@@ -12,7 +12,37 @@ public class SistemBeasiswa {
 
     static Scanner scanner = new Scanner(System.in);
 
+    public static void main(String[] args) {
+        int pilihan;
+        
+        do {
+            tampilkanMenu();
+            System.out.print("Pilih menu (1-5): ");
+            pilihan = scanner.nextInt();
+            scanner.nextLine();
 
+            switch (pilihan) {
+                case 1:
+                    tambahData();
+                    break;
+                case 2:
+                    tampilkanSemuaData();
+                    break;
+                case 3:
+                    cariData();
+                    break;
+                case 4:
+                    hitungRataRata();
+                    break;
+                case 5:
+                    System.out.println("Keluar dari program.");
+                    break;
+                default:
+                    System.out.println("Pilihan tidak valid.");
+            }
+            System.out.println();
+        } while (pilihan != 5);
+    }
 
     static void tampilkanMenu() {
         System.out.println("=== Sistem Pendaftaran Beasiswa ===");
@@ -117,7 +147,24 @@ public class SistemBeasiswa {
         }
     }
     
+    static void hitungRataRata() {
+        if (jumlahPendaftar == 0) {
+            System.out.println("Belum ada data.");
+            return;
+        }
 
+        String[] kategori = {"Reguler", "Unggulan", "Riset"};
+    
+        for (String kat : kategori) {
+            double totalIPK = 0;
+            int count = 0;
+
+            for (int i = 0; i < jumlahPendaftar; i++) {
+                if (dataString[i][2].equalsIgnoreCase(kat)) {
+                    totalIPK += dataIPK[i];
+                    count++;
+                }
+            }
 
             System.out.print(kat + " \t: ");
             if (count > 0) {
